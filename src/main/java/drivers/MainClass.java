@@ -30,10 +30,10 @@ public class MainClass {
      */
     private void init() {
 
-    	ChocoProvidableModel chocoProvidableMod = new ChocoProvidableModel();
-    	ChocoProviderModel chocoProviderMod = new ChocoProviderModel();
-    	ChocoServiceProvidedModel chocoServiceProvidedMod = new ChocoServiceProvidedModel();
-    	ChocoUserModel chocoUserMod = new ChocoUserModel();
+    	BillableModel billableMod = new BillableModel();
+    	ProviderModel providerMod = new ProviderModel();
+    	ServiceModel serviceMod = new ServiceModel();
+    	UserModel userMod = new UserModel();
 
         get("/", (request, response) -> {
            Map<String, Object> viewObjects = new HashMap<String, Object>();
@@ -42,22 +42,22 @@ public class MainClass {
            return new ModelAndView(viewObjects, "main.ftl");
         }, new FreeMarkerEngine());
 
-        get("/createChocoProvidable", (request, response) -> {
+        get("/createBillable", (request, response) -> {
            Map<String, Object> viewObjects = new HashMap<String, Object>();
-           viewObjects.put("templateName", "createChocoProvidableForm.ftl");
+           viewObjects.put("templateName", "createBillableForm.ftl");
            return new ModelAndView(viewObjects, "main.ftl");
         }, new FreeMarkerEngine());
         
-        post("/createChocoProvidable", (request, response) -> {
+        post("/createBillable", (request, response) -> {
             ObjectMapper mapper = new ObjectMapper();
             try {
-                ChocoProvidable u = mapper.readValue(request.body(), ChocoProvidable.class);
+                Billable u = mapper.readValue(request.body(), Billable.class);
                 if (!u.isValid()) {
                     response.status(400);
                     return "Correct the fields";
                 }
-                if(chocoProvidableMod.checkChocoProvidable(u.getProvidableServiceIdNum())) {
-                    int id = chocoProvidableMod.createChocoProvidable(u.getProvidableServiceIdNum(), u.getProvidableServiceDescription());
+                    if(billableMod.checkBillable(u.getChocoServiceProvidedIdNumber())) {
+                    int id = billableMod.createBillable(u.getChocoServiceProvidedIdNumber(), u.getMemberNumberService(), u.getProviderNumberServicing(), u.getDateServiced(), u.getDateServicedRecorded(), u.getServiceComment());
                     response.status(200);
                     response.type("application/json");
                     return id;
@@ -65,7 +65,7 @@ public class MainClass {
                 else {
                     response.status(400);
                     response.type("application/json");
-                    return "ChocoProvidable Already Exists";
+                    return "Billable Already Exists";
                 }
                 } catch (JsonParseException jpe) {
                     response.status(404);
@@ -73,56 +73,56 @@ public class MainClass {
                 }
         });
         
-        get("/getAllChocoProvidables", (request, response) -> {
+        get("/getAllBillables", (request, response) -> {
             response.status(200);
             Map<String, Object> viewObjects = new HashMap<String, Object>();
-            viewObjects.put("templateName", "showChocoProvidable.ftl");
+            viewObjects.put("templateName", "showBillable.ftl");
             return new ModelAndView(viewObjects, "main.ftl");
         }, new FreeMarkerEngine());
 
-        get("/getJsonChocoProvidableList", (request, response) -> {
+        get("/getJsonBillableList", (request, response) -> {
             response.status(200);
-            return toJSON(chocoProvidableMod.sendElements());
+            return toJSON(billableMod.sendElements());
         });
 
-        get("/removeChocoProvidable", (request, response) -> {
+        get("/removeBillable", (request, response) -> {
            Map<String, Object> viewObjects = new HashMap<String, Object>();
-           viewObjects.put("templateName", "removeChocoProvidableForm.ftl"); 
-           viewObjects.put("chocoProvidables", toJSON(chocoProvidableMod.sendChocoProvidablesId()));
+           viewObjects.put("templateName", "removeBillableForm.ftl"); 
+           viewObjects.put("billables", toJSON(billableMod.sendBillablesId()));
            return new ModelAndView(viewObjects, "main.ftl");
         }, new FreeMarkerEngine());
 
-        put("/removeChocoProvidable/:id", (request, response) -> {
+        put("/removeBillable/:id", (request, response) -> {
             String id = request.params(":id");
             Map<String, Object> viewObjects = new HashMap<String, Object>();
-            if(chocoProvidableMod.removeChocoProvidable(id)) return "ChocoProvidable Removed";
-            else return "No Such ChocoProvidable Found";
+            if(billableMod.removeBillable(id)) return "Billable Removed";
+            else return "No Such Billable Found";
         });
         
-        get("/updateChocoProvidable", (request, response) -> {
+        get("/updateBillable", (request, response) -> {
            Map<String, Object> viewObjects = new HashMap<String, Object>();
-           viewObjects.put("templateName", "updateChocoProvidableForm.ftl");
+           viewObjects.put("templateName", "updateBillableForm.ftl");
            return new ModelAndView(viewObjects, "main.ftl");
         }, new FreeMarkerEngine());
         
-        post("/updateChocoProvidable", (request, response) -> {
+        post("/updateBillable", (request, response) -> {
             ObjectMapper mapper = new ObjectMapper();
             
             try {
-                ChocoProvidable u = mapper.readValue(request.body(), ChocoProvidable.class);
-                if (!u.isValid()) { 
+                Billable u = mapper.readValue(request.body(), Billable.class);
+                if (!u.isValid()) {
                     response.status(400);
                     return "Correct the fields";
                 }
-                if(!chocoProvidableMod.checkChocoProvidable(u.getProvidableServiceIdNum())) {
-                    int id = chocoProvidableMod.updateChocoProvidable(u.getProvidableServiceIdNum(), u.getProvidableServiceDescription());
+                if(!billableMod.checkBillable(u.getChocoServiceProvidedIdNumber())) {
+                    int id = billableMod.updateBillable(u.getChocoServiceProvidedIdNumber(), u.getMemberNumberService(), u.getProviderNumberServicing(), u.getDateServiced(), u.getDateServicedRecorded(), u.getServiceComment());
                     response.status(200);
                     response.type("application/json");
                     return id;
                 }
                 else {
                     response.status(404);
-                    return "ChocoProvidable Does Not Exists";
+                    return "Billable Does Not Exists";
                 }
                 } catch (JsonParseException jpe) {
                     response.status(404);
@@ -130,22 +130,22 @@ public class MainClass {
                 }
         });
         
-        get("/createChocoProvider", (request, response) -> {
+        get("/createProvider", (request, response) -> {
            Map<String, Object> viewObjects = new HashMap<String, Object>();
-           viewObjects.put("templateName", "createChocoProviderForm.ftl");
+           viewObjects.put("templateName", "createProviderForm.ftl");
            return new ModelAndView(viewObjects, "main.ftl");
         }, new FreeMarkerEngine());
         
-        post("/createChocoProvider", (request, response) -> {
+        post("/createProvider", (request, response) -> {
             ObjectMapper mapper = new ObjectMapper();
             try {
-                ChocoProvider u = mapper.readValue(request.body(), ChocoProvider.class);
-                if (!u.isValid()) { 
+                Provider u = mapper.readValue(request.body(), Provider.class);
+                if (!u.isValid()) {
                     response.status(400);
                     return "Correct the fields";
                 }
-                    if(chocoProviderMod.checkChocoProvider(u.getProviderNumber())) {
-                    int id = chocoProviderMod.createChocoProvider(u.getProviderNumber(), u.getProviderName(), u.getProviderStreetAddress(), u.getProviderCity(), u.getProviderState(), u.getProviderZip());
+                    if(providerMod.checkProvider(u.getProviderNumber())) {
+                    int id = providerMod.createProvider(u.getProviderNumber(), u.getProviderName(), u.getProviderStreetAddress(), u.getProviderCity(), u.getProviderState(), u.getProviderZip(), u.getIsDietitian(), u.getIsExerciseExpert(), u.getIsInternist());
                     response.status(200);
                     response.type("application/json");
                     return id;
@@ -153,7 +153,7 @@ public class MainClass {
                 else {
                     response.status(400);
                     response.type("application/json");
-                    return "ChocoProvider Already Exists";
+                    return "Provider Already Exists";
                 }
                 } catch (JsonParseException jpe) {
                     response.status(404);
@@ -161,56 +161,56 @@ public class MainClass {
                 }
         });
         
-        get("/getAllChocoProviders", (request, response) -> {
+        get("/getAllProviders", (request, response) -> {
             response.status(200);
             Map<String, Object> viewObjects = new HashMap<String, Object>();
-            viewObjects.put("templateName", "showChocoProvider.ftl");
+            viewObjects.put("templateName", "showProvider.ftl");
             return new ModelAndView(viewObjects, "main.ftl");
         }, new FreeMarkerEngine());
 
-        get("/getJsonChocoProviderList", (request, response) -> {
+        get("/getJsonProviderList", (request, response) -> {
             response.status(200);
-            return toJSON(chocoProviderMod.sendElements());
+            return toJSON(providerMod.sendElements());
         });
 
-        get("/removeChocoProvider", (request, response) -> {
+        get("/removeProvider", (request, response) -> {
            Map<String, Object> viewObjects = new HashMap<String, Object>();
-           viewObjects.put("templateName", "removeChocoProviderForm.ftl"); 
-           viewObjects.put("chocoProviders", toJSON(chocoProviderMod.sendChocoProvidersId()));
+           viewObjects.put("templateName", "removeProviderForm.ftl"); 
+           viewObjects.put("providers", toJSON(providerMod.sendProvidersId()));
            return new ModelAndView(viewObjects, "main.ftl");
         }, new FreeMarkerEngine());
 
-        put("/removeChocoProvider/:id", (request, response) -> {
+        put("/removeProvider/:id", (request, response) -> {
             String id = request.params(":id");
             Map<String, Object> viewObjects = new HashMap<String, Object>();
-            if(chocoProviderMod.removeChocoProvider(id)) return "ChocoProvider Removed";
-            else return "No Such ChocoProvider Found";
+            if(providerMod.removeProvider(id)) return "Provider Removed";
+            else return "No Such Provider Found";
         });
         
-        get("/updateChocoProvider", (request, response) -> {
+        get("/updateProvider", (request, response) -> {
            Map<String, Object> viewObjects = new HashMap<String, Object>();
-           viewObjects.put("templateName", "updateChocoProviderForm.ftl");
+           viewObjects.put("templateName", "updateProviderForm.ftl");
            return new ModelAndView(viewObjects, "main.ftl");
         }, new FreeMarkerEngine());
         
-        post("/updateChocoProvider", (request, response) -> {
+        post("/updateProvider", (request, response) -> {
             ObjectMapper mapper = new ObjectMapper();
             
             try {
-                ChocoProvider u = mapper.readValue(request.body(), ChocoProvider.class);
-                if (!u.isValid()) {  
+                Provider u = mapper.readValue(request.body(), Provider.class);
+                if (!u.isValid()) {
                     response.status(400);
                     return "Correct the fields";
                 }
-                if(!chocoProviderMod.checkChocoProvider(u.getProviderNumber())) {
-                    int id = chocoProviderMod.updateChocoProvider(u.getProviderNumber(), u.getProviderName(), u.getProviderStreetAddress(), u.getProviderCity(), u.getProviderState(), u.getProviderZip());
+                if(!providerMod.checkProvider(u.getProviderNumber())) {
+                    int id = providerMod.updateProvider(u.getProviderNumber(), u.getProviderName(), u.getProviderStreetAddress(), u.getProviderCity(), u.getProviderState(), u.getProviderZip(), u.getIsDietitian(), u.getIsExerciseExpert(), u.getIsInternist());
                     response.status(200);
                     response.type("application/json");
                     return id;
                 }
                 else {
                     response.status(404);
-                    return "ChocoProvider Does Not Exists";
+                    return "Provider Does Not Exists";
                 }
                 } catch (JsonParseException jpe) {
                     response.status(404);
@@ -218,22 +218,22 @@ public class MainClass {
                 }
         });
         
-        get("/createChocoServiceProvided", (request, response) -> {
+        get("/createService", (request, response) -> {
            Map<String, Object> viewObjects = new HashMap<String, Object>();
-           viewObjects.put("templateName", "createChocoServiceProvidedForm.ftl");
+           viewObjects.put("templateName", "createServiceForm.ftl");
            return new ModelAndView(viewObjects, "main.ftl");
         }, new FreeMarkerEngine());
         
-        post("/createChocoServiceProvided", (request, response) -> {
+        post("/createService", (request, response) -> {
             ObjectMapper mapper = new ObjectMapper();
             try {
-                ChocoServiceProvided u = mapper.readValue(request.body(), ChocoServiceProvided.class);
-                if (!u.isValid()) {  
+                Service u = mapper.readValue(request.body(), Service.class);
+                if (!u.isValid()) {
                     response.status(400);
                     return "Correct the fields";
                 }
-                    if(chocoServiceProvidedMod.checkChocoServiceProvided(u.getChocoServiceProvidedIdNumber())) {
-                    int id = chocoServiceProvidedMod.createChocoServiceProvided(u.getChocoServiceProvidedIdNumber(), u.getMemberNumberService(), u.getProviderNumberServicing(), u.getDateServiced(), u.getDateServicedRecorded(), u.getServiceComment());
+                    if(serviceMod.checkService(u.getProvidableServiceIdNum())) {
+                    int id = serviceMod.createService(u.getProvidableServiceIdNum(), u.getProvidableServiceDescription(), u.getIsProvidableByDietitian(), u.getIsProvidableByExerciseExpert(), u.getIsProvidableByInternist());
                     response.status(200);
                     response.type("application/json");
                     return id;
@@ -241,7 +241,7 @@ public class MainClass {
                 else {
                     response.status(400);
                     response.type("application/json");
-                    return "ChocoServiceProvided Already Exists";
+                    return "Service Already Exists";
                 }
                 } catch (JsonParseException jpe) {
                     response.status(404);
@@ -249,56 +249,56 @@ public class MainClass {
                 }
         });
         
-        get("/getAllChocoServiceProvideds", (request, response) -> {
+        get("/getAllServices", (request, response) -> {
             response.status(200);
             Map<String, Object> viewObjects = new HashMap<String, Object>();
-            viewObjects.put("templateName", "showChocoServiceProvided.ftl");
+            viewObjects.put("templateName", "showService.ftl");
             return new ModelAndView(viewObjects, "main.ftl");
         }, new FreeMarkerEngine());
 
-        get("/getJsonChocoServiceProvidedList", (request, response) -> {
+        get("/getJsonServiceList", (request, response) -> {
             response.status(200);
-            return toJSON(chocoServiceProvidedMod.sendElements());
+            return toJSON(serviceMod.sendElements());
         });
 
-        get("/removeChocoServiceProvided", (request, response) -> {
+        get("/removeService", (request, response) -> {
            Map<String, Object> viewObjects = new HashMap<String, Object>();
-           viewObjects.put("templateName", "removeChocoServiceProvidedForm.ftl"); 
-           viewObjects.put("chocoServiceProvideds", toJSON(chocoServiceProvidedMod.sendChocoServiceProvidedsId()));
+           viewObjects.put("templateName", "removeServiceForm.ftl"); 
+           viewObjects.put("services", toJSON(serviceMod.sendServicesId()));
            return new ModelAndView(viewObjects, "main.ftl");
         }, new FreeMarkerEngine());
 
-        put("/removeChocoServiceProvided/:id", (request, response) -> {
+        put("/removeService/:id", (request, response) -> {
             String id = request.params(":id");
             Map<String, Object> viewObjects = new HashMap<String, Object>();
-            if(chocoServiceProvidedMod.removeChocoServiceProvided(id)) return "ChocoServiceProvided Removed";
-            else return "No Such ChocoServiceProvided Found";
+            if(serviceMod.removeService(id)) return "Service Removed";
+            else return "No Such Service Found";
         });
         
-        get("/updateChocoServiceProvided", (request, response) -> {
+        get("/updateService", (request, response) -> {
            Map<String, Object> viewObjects = new HashMap<String, Object>();
-           viewObjects.put("templateName", "updateChocoServiceProvidedForm.ftl");
+           viewObjects.put("templateName", "updateServiceForm.ftl");
            return new ModelAndView(viewObjects, "main.ftl");
         }, new FreeMarkerEngine());
         
-        post("/updateChocoServiceProvided", (request, response) -> {
+        post("/updateService", (request, response) -> {
             ObjectMapper mapper = new ObjectMapper();
             
             try {
-                ChocoServiceProvided u = mapper.readValue(request.body(), ChocoServiceProvided.class);
-                if (!u.isValid()) {  
+                Service u = mapper.readValue(request.body(), Service.class);
+                if (!u.isValid()) {
                     response.status(400);
                     return "Correct the fields";
                 }
-                if(!chocoServiceProvidedMod.checkChocoServiceProvided(u.getChocoServiceProvidedIdNumber())) {
-                    int id = chocoServiceProvidedMod.updateChocoServiceProvided(u.getChocoServiceProvidedIdNumber(), u.getMemberNumberService(), u.getProviderNumberServicing(), u.getDateServiced(), u.getDateServicedRecorded(), u.getServiceComment());
+                if(!serviceMod.checkService(u.getProvidableServiceIdNum())) {
+                    int id = serviceMod.updateService(u.getProvidableServiceIdNum(), u.getProvidableServiceDescription(), u.getIsProvidableByDietitian(), u.getIsProvidableByExerciseExpert(), u.getIsProvidableByInternist());
                     response.status(200);
                     response.type("application/json");
                     return id;
                 }
                 else {
                     response.status(404);
-                    return "ChocoServiceProvided Does Not Exists";
+                    return "Service Does Not Exists";
                 }
                 } catch (JsonParseException jpe) {
                     response.status(404);
@@ -306,22 +306,22 @@ public class MainClass {
                 }
         });
         
-        get("/createChocoUser", (request, response) -> {
+        get("/createUser", (request, response) -> {
            Map<String, Object> viewObjects = new HashMap<String, Object>();
-           viewObjects.put("templateName", "createChocoUserForm.ftl");
+           viewObjects.put("templateName", "createUserForm.ftl");
            return new ModelAndView(viewObjects, "main.ftl");
         }, new FreeMarkerEngine());
         
-        post("/createChocoUser", (request, response) -> {
+        post("/createUser", (request, response) -> {
             ObjectMapper mapper = new ObjectMapper();
             try {
-                ChocoUser u = mapper.readValue(request.body(), ChocoUser.class);
-                if (!u.isValid()) {  
+                User u = mapper.readValue(request.body(), User.class);
+                if (!u.isValid()) {
                     response.status(400);
                     return "Correct the fields";
                 }
-                    if(chocoUserMod.checkChocoUser(u.getMemberNumber())) {
-                    int id = chocoUserMod.createChocoUser(u.getMemberNumber(), u.getMemberName(), u.getMemberStreetAddress(), u.getMemberCity(), u.getMemberState(), u.getMemberZip());
+                    if(userMod.checkUser(u.getMemberNumber())) {
+                    int id = userMod.createUser(u.getMemberNumber(), u.getMemberName(), u.getMemberStreetAddress(), u.getMemberCity(), u.getMemberState(), u.getMemberZip());
                     response.status(200);
                     response.type("application/json");
                     return id;
@@ -329,7 +329,7 @@ public class MainClass {
                 else {
                     response.status(400);
                     response.type("application/json");
-                    return "ChocoUser Already Exists";
+                    return "User Already Exists";
                 }
                 } catch (JsonParseException jpe) {
                     response.status(404);
@@ -337,56 +337,56 @@ public class MainClass {
                 }
         });
         
-        get("/getAllChocoUsers", (request, response) -> {
+        get("/getAllUsers", (request, response) -> {
             response.status(200);
             Map<String, Object> viewObjects = new HashMap<String, Object>();
-            viewObjects.put("templateName", "showChocoUser.ftl");
+            viewObjects.put("templateName", "showUser.ftl");
             return new ModelAndView(viewObjects, "main.ftl");
         }, new FreeMarkerEngine());
 
-        get("/getJsonChocoUserList", (request, response) -> {
+        get("/getJsonUserList", (request, response) -> {
             response.status(200);
-            return toJSON(chocoUserMod.sendElements());
+            return toJSON(userMod.sendElements());
         });
 
-        get("/removeChocoUser", (request, response) -> {
+        get("/removeUser", (request, response) -> {
            Map<String, Object> viewObjects = new HashMap<String, Object>();
-           viewObjects.put("templateName", "removeChocoUserForm.ftl"); 
-           viewObjects.put("chocoUsers", toJSON(chocoUserMod.sendChocoUsersId()));
+           viewObjects.put("templateName", "removeUserForm.ftl"); 
+           viewObjects.put("users", toJSON(userMod.sendUsersId()));
            return new ModelAndView(viewObjects, "main.ftl");
         }, new FreeMarkerEngine());
 
-        put("/removeChocoUser/:id", (request, response) -> {
+        put("/removeUser/:id", (request, response) -> {
             String id = request.params(":id");
             Map<String, Object> viewObjects = new HashMap<String, Object>();
-            if(chocoUserMod.removeChocoUser(id)) return "ChocoUser Removed";
-            else return "No Such ChocoUser Found";
+            if(userMod.removeUser(id)) return "User Removed";
+            else return "No Such User Found";
         });
         
-        get("/updateChocoUser", (request, response) -> {
+        get("/updateUser", (request, response) -> {
            Map<String, Object> viewObjects = new HashMap<String, Object>();
-           viewObjects.put("templateName", "updateChocoUserForm.ftl");
+           viewObjects.put("templateName", "updateUserForm.ftl");
            return new ModelAndView(viewObjects, "main.ftl");
         }, new FreeMarkerEngine());
         
-        post("/updateChocoUser", (request, response) -> {
+        post("/updateUser", (request, response) -> {
             ObjectMapper mapper = new ObjectMapper();
             
             try {
-                ChocoUser u = mapper.readValue(request.body(), ChocoUser.class);
-                if (!u.isValid()) {  
+                User u = mapper.readValue(request.body(), User.class);
+                if (!u.isValid()) {
                     response.status(400);
                     return "Correct the fields";
                 }
-                if(!chocoUserMod.checkChocoUser(u.getMemberNumber())) {
-                    int id = chocoUserMod.updateChocoUser(u.getMemberNumber(), u.getMemberName(), u.getMemberStreetAddress(), u.getMemberCity(), u.getMemberState(), u.getMemberZip());
+                if(!userMod.checkUser(u.getMemberNumber())) {
+                    int id = userMod.updateUser(u.getMemberNumber(), u.getMemberName(), u.getMemberStreetAddress(), u.getMemberCity(), u.getMemberState(), u.getMemberZip());
                     response.status(200);
                     response.type("application/json");
                     return id;
                 }
                 else {
                     response.status(404);
-                    return "ChocoUser Does Not Exists";
+                    return "User Does Not Exists";
                 }
                 } catch (JsonParseException jpe) {
                     response.status(404);

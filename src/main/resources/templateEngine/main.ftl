@@ -22,45 +22,45 @@
                   <li class="active"><a href="/">Home</a></li>
 
                   <li class="dropdown">
-                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">ChocoProvidable<span class="caret"></span></a>
+                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Billable<span class="caret"></span></a>
                      <ul class="dropdown-menu">
-                        <li><a href="createChocoProvidable">Create ChocoProvidable</a></li>
-                        <li><a href="getAllChocoProvidables">Get All ChocoProvidables</a></li>
-                        <li><a href="updateChocoProvidable">Update ChocoProvidable</a></li>
-                        <li><a href="removeChocoProvidable">Remove ChocoProvidable</a></li>
+                        <li><a href="createBillable">Create Billable</a></li>
+                        <li><a href="getAllBillables">Get All Billables</a></li>
+                        <li><a href="updateBillable">Update Billable</a></li>
+                        <li><a href="removeBillable">Remove Billable</a></li>
                      </ul>
                   </li>
 
 
                   <li class="dropdown">
-                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">ChocoProvider<span class="caret"></span></a>
+                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Provider<span class="caret"></span></a>
                      <ul class="dropdown-menu">
-                        <li><a href="createChocoProvider">Create ChocoProvider</a></li>
-                        <li><a href="getAllChocoProviders">Get All ChocoProviders</a></li>
-                        <li><a href="updateChocoProvider">Update ChocoProvider</a></li>
-                        <li><a href="removeChocoProvider">Remove ChocoProvider</a></li>
+                        <li><a href="createProvider">Create Provider</a></li>
+                        <li><a href="getAllProviders">Get All Providers</a></li>
+                        <li><a href="updateProvider">Update Provider</a></li>
+                        <li><a href="removeProvider">Remove Provider</a></li>
                      </ul>
                   </li>
 
 
                   <li class="dropdown">
-                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">ChocoServiceProvided<span class="caret"></span></a>
+                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Service<span class="caret"></span></a>
                      <ul class="dropdown-menu">
-                        <li><a href="createChocoServiceProvided">Create ChocoServiceProvided</a></li>
-                        <li><a href="getAllChocoServiceProvideds">Get All ChocoServiceProvideds</a></li>
-                        <li><a href="updateChocoServiceProvided">Update ChocoServiceProvided</a></li>
-                        <li><a href="removeChocoServiceProvided">Remove ChocoServiceProvided</a></li>
+                        <li><a href="createService">Create Service</a></li>
+                        <li><a href="getAllServices">Get All Services</a></li>
+                        <li><a href="updateService">Update Service</a></li>
+                        <li><a href="removeService">Remove Service</a></li>
                      </ul>
                   </li>
 
 
                   <li class="dropdown">
-                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">ChocoUser<span class="caret"></span></a>
+                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">User<span class="caret"></span></a>
                      <ul class="dropdown-menu">
-                        <li><a href="createChocoUser">Create ChocoUser</a></li>
-                        <li><a href="getAllChocoUsers">Get All ChocoUsers</a></li>
-                        <li><a href="updateChocoUser">Update ChocoUser</a></li>
-                        <li><a href="removeChocoUser">Remove ChocoUser</a></li>
+                        <li><a href="createUser">Create User</a></li>
+                        <li><a href="getAllUsers">Get All Users</a></li>
+                        <li><a href="updateUser">Update User</a></li>
+                        <li><a href="removeUser">Remove User</a></li>
                      </ul>
                   </li>
 
