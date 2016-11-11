@@ -8,7 +8,7 @@ public class ChocoUser implements Validable{
     private String memberCity; //14 chars
     private String memberState; //2 chars
     private long memberZip; //5 digits
-    private String memberStatus; //Active or Suspended
+    private boolean memberStatusIsActive; //Active or Suspended
     
     public String getMemberNumber() {
         return memberNumber;
