@@ -41,7 +41,8 @@ public class Application implements CommandLineRunner{
 
     private ChocoMongoController mongoController = new ChocoMongoController();
     private ChocoReportController reportController = new ChocoReportController();
-    private ChocoTestDataController testDataController = new ChocoTestDataController();
+    private ChocoTestData testDataController = new ChocoTestData();
+    //private ChocoTestData testData = new ChocoTestData();
 
 	public static void main(String[] args) {
 
