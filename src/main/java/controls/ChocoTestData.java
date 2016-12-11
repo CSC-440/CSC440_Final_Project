@@ -51,6 +51,9 @@ public class ChocoTestData {
     	states = getNames(folder + settings.get("statesFile"));
     	streetNames = getNames(folder + settings.get("streetNames"));
         streetTypes = getNames(folder + settings.get("streetTypes"));
+        
+        //System.out.println(settings.get("billableMinDate"));
+        //System.out.println(settings.get("billableMaxDate"));
     }
     
     public boolean addTestDataTo(BillableRepository billableRepository){
@@ -63,6 +66,8 @@ public class ChocoTestData {
         DateTimeFormatter timeFormat = DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss");
         DateTime min = timeFormat.parseDateTime(settings.get("billableMinDate"));
         DateTime max = timeFormat.parseDateTime(settings.get("billableMaxDate"));
+        //System.out.println(min);
+        //System.out.println(max);
 
 
         
@@ -88,7 +93,7 @@ public class ChocoTestData {
 		
 		//yyyy-MM-dd'T'HH:mm:ssZ
 		//System.out.println("generating additional billables ...");
-		for (int i = 0; i < Integer.parseInt(settings.get("numberOfBillables")); i++){
+		for (int i = records.size(); i < Integer.parseInt(settings.get("numberOfBillables")); i++){
 		    Billable billableTestData = new Billable();
 		    DateTime temp = createRandomDate(min,max);
 		    
@@ -151,10 +156,9 @@ public class ChocoTestData {
         for (int i = 0; i < Integer.parseInt(settings.get("numberOfProviders")); i++){
         	Provider providerTestData = new Provider();
 
-            String tempProv = providerIDs.get(rand.nextInt(providerIDs.size()));
-            providerTestData.setEntityProviderIdNumber(tempProv);
-            providerTestData.setEntityProviderEmailAddress(String.format("%s@%s.com",names.get(i),serviceNames.get(rand.nextInt(serviceNames.size()))));
-            providerTestData.setProviderName(names.get(rand.nextInt(names.size())));
+            providerTestData.setEntityProviderIdNumber(providerIDs.get(i));
+            providerTestData.setEntityProviderEmailAddress(String.format("%s@%s.com",names.get(i).replaceAll("\\s+",""),serviceNames.get(rand.nextInt(serviceNames.size()))));
+            providerTestData.setProviderName(names.get(i));
             providerTestData.setProviderStreetAddress(String.format("%d %s %s",rand.nextInt(9998)+1,streetNames.get(rand.nextInt(streetNames.size())),streetTypes.get(rand.nextInt(streetTypes.size()))));
             providerTestData.setProviderCity(cities.get(rand.nextInt(cities.size())));
             providerTestData.setProviderState(states.get(rand.nextInt(states.size())));
@@ -199,8 +203,8 @@ public class ChocoTestData {
         for (int i = 0; i < Integer.parseInt(settings.get("numberOfServices")); i++){
         	Service serviceTestData = new Service();
         
-            serviceTestData.setEntityServiceIdNumber(serviceIDs.get(rand.nextInt(serviceIDs.size())));
-            serviceTestData.setProvidableServiceDescription(String.format("Random service desicription #%d",i));
+            serviceTestData.setEntityServiceIdNumber(serviceIDs.get(i));
+            serviceTestData.setProvidableServiceDescription(String.format("Random service desicription #%d",i+1));
             serviceTestData.setIsProvidableByDietitian(rand.nextBoolean());
             serviceTestData.setIsProvidableByExerciseExpert(rand.nextBoolean());
             serviceTestData.setIsProvidableByInternist(rand.nextBoolean());
@@ -251,12 +255,11 @@ public class ChocoTestData {
         
         for (int i = 0; i < Integer.parseInt(settings.get("numberOfMembers")); i++){
         	User userTestData = new User();
+        	
         	DateTime temp = createRandomDate(min,max);
-        
-            String tempUser = memberIDs.get(rand.nextInt(memberIDs.size()));
-            userTestData.setEntityUserIdNumber(tempUser);
-            userTestData.setEntityUserEmailAddress(String.format("%s@%s.com",names.get(i),serviceNames.get(rand.nextInt(serviceNames.size()))));
-            userTestData.setMemberName(names.get(rand.nextInt(names.size())));
+            userTestData.setEntityUserIdNumber(memberIDs.get(i));
+            userTestData.setEntityUserEmailAddress(String.format("%s@%s.com",names.get(i).replaceAll("\\s+",""),serviceNames.get(rand.nextInt(serviceNames.size()))));
+            userTestData.setMemberName(names.get(i));
             userTestData.setMemberStreetAddress(String.format("%d %s %s",rand.nextInt(9998)+1,streetNames.get(rand.nextInt(streetNames.size())),streetTypes.get(rand.nextInt(streetTypes.size()))));
             userTestData.setMemberCity(cities.get(rand.nextInt(cities.size())));
             userTestData.setMemberState(states.get(rand.nextInt(states.size())));
@@ -281,8 +284,9 @@ public class ChocoTestData {
         int mills = rand.nextInt(999)+1;
         
         DateTime temp = new DateTime(year,1,1,hour,minute,second,mills);
-        temp.plusDays(dayOfYear - 1);
+        temp = temp.plusDays(dayOfYear - 1);
         
+        System.out.println(temp);
         return temp;
     }
     
