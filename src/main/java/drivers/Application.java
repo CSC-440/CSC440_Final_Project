@@ -871,7 +871,7 @@ public class Application implements CommandLineRunner{
         }, new FreeMarkerEngine());
 
         put("/autoAddDataToMongoDB", (request, response) -> {
-            
+            testDataController.init();
             String returnString = "";
 
             if (testDataController.addTestDataTo(billableRepository)){
