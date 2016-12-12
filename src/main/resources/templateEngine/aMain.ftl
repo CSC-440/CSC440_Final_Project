@@ -1,8 +1,6 @@
 <html>
-
 <head>
    <title>Spark Project</title>
-
    <link rel="apple-touch-icon" sizes="57x57" href="img/favicon/apple-icon-57x57.png">
    <link rel="apple-touch-icon" sizes="60x60" href="img/favicon/apple-icon-60x60.png">
    <link rel="apple-touch-icon" sizes="72x72" href="img/favicon/apple-icon-72x72.png">
@@ -24,7 +22,6 @@
    <link rel="stylesheet" href="css/bootstrap.min.css">
    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
    <link rel="stylesheet" href="css/bootstrap-datepicker3.standalone.css">
-
    <link rel="stylesheet" href="css/choco-application-template.css">
 </head>
 
@@ -119,7 +116,7 @@
                <!-- Dropdown Help Menu. -->
 
                <li class="dropdown">
-                  <a class="dropdown-toggle" data-toggle="dropdown" href="#">HELP<span class="caret"></span></a>
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="#">Info<span class="caret"></span></a>
                   <ul class="dropdown-menu">
                      <li><a href="assignment">Assignment</a></li>
                      <li><a href="installHelp">Install</a></li>
@@ -129,16 +126,36 @@
                   </ul>
                </li>
 
-            </ul>
-            <!-- End of Dropdown menus -->
+               <!-- Dropdown Menu for for Testing Options. -->
+
+               <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="#">Testing<span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                     <li><a href="addTestData">Insert Test Data</a></li>
+                     <li><a href="clearMongoDB">Remove All MongoDB Data</a></li>
+                     <li><a href="clearMongoDBAndAddTestData"><strong style="color: red;">!&iexcl;Auto Remove + Auto Add&iexcl;!</strong></a></li>
+                  </ul>
+               </li>
+
+            </ul> <!-- End of Dropdown menus -->
          </div>
-         <!--/.nav-collapse -->
       </div>
    </div>
 
    <script src="js/jquery.min.js"></script>
    <script src="js/bootstrap.min.js"></script>
    <script src="js/bootstrap-datepicker.min.js"></script>
+   
+   <script>
+   $(document).ready(function(){
+     $('.dropdown-submenu a.testing_dropdown').on("click", function(e){
+       $(this).next('ul').toggle();
+       e.stopPropagation();
+       e.preventDefault();
+     });
+   });
+   </script>
+   
    <div class="container">
       <#include "${templateName}">
    </div>
