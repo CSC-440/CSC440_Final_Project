@@ -2,7 +2,7 @@
 
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Haos House</title>
+    <title>Team Five!</title>
 
     <!-- Library scripts and markup -->
     <script type='text/javascript' src='lib/js/x3dom.js'></script>
@@ -15,7 +15,7 @@
             border-style: none;
             /*
             */
-            background:#D3D3D3 url(img/x3d_object_spun_background.jpg);
+            background: #D3D3D3 url(img/x3d_object_spun_background.jpg);
         }
     </style>
 
@@ -23,9 +23,8 @@
 
 <body>
     <x3d id="logo_full_screen">
-        <scene>
-<Viewpoint position="-0.00187 0.03192 0.08770" orientation="0.00000 0.00000 0.00000 0.00000" 
- description="defaultX3DViewpointNode"></Viewpoint>
+        <scene onclick="handleClick()">
+            <Viewpoint position="-0.00187 0.03192 0.08770" orientation="0.00000 0.00000 0.00000 0.00000" description="defaultX3DViewpointNode"></Viewpoint>
             <Transform DEF="logos">
                 <Inline url="obj/x3d_object_spun.x3d"></Inline>
             </Transform>
@@ -41,16 +40,28 @@
 
             <ROUTE fromNode='clock' fromField='fraction_changed' toNode='spinThings' toField='set_fraction'></ROUTE>
             <ROUTE fromNode='spinThings' fromField='value_changed' toNode='logos' toField='set_rotation'></ROUTE>
-            <!--  
 
-NOTE: If you "comment-out" of this line and then you can adjust.
-
-            'd'key opens the "nav" console.
-            'v' key outputs the viewpoint to the console
             <NavigationInfo type='none'>
--->
+                <!--  
+                NOTE: If you "comment-out" of this line and then you can adjust.
+    
+                'd'key opens the "nav" console.
+                'v' key outputs the viewpoint to the console
+            -->
         </scene>
     </x3d>
+
+<script>
+    
+    // Handle click.
+    // Sauce : http://doc.x3dom.org/tutorials/animationInteraction/picking/index.html
+   	function handleClick()
+   	{
+   		var url_for_page_redirect = "lander.html";
+   		location.href = url_for_page_redirect;
+   	}
+</script>
+
 </body>
 
 </html>
