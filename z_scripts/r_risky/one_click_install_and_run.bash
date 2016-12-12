@@ -16,6 +16,12 @@ function set_variables(){
     repo_url="git@github.com:CSC-440/CSC440_Final_Project.git"
 }
 
+function clone_repo(){
+    git clone $repo_url project_demo
+    cd project_demo
+    bash Y_RUNME.bash
+}
+
 function init(){
     local intro_message;
     local repo_url;
