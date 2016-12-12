@@ -7,3 +7,12 @@
 777777, Provided Service Seven, true, true, true
 888888, Provided Service Eight, false, false, false
 999999, Provided Service Nine, true, false, false
+111111, Provided Service One, true, false, false
+222222, Provided Service Two, false, true, false
+333333, Provided Service Three, false, false, true
+444444, Provided Service Four, true, true, false
+555555, Provided Service Five, true, false, true
+666666, Provided Service Six, false, true, true
+777777, Provided Service Seven, true, true, true
+888888, Provided Service Eight, false, false, false
+999999, Provided Service Nine, true, false, false
