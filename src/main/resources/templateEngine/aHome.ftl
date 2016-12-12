@@ -35,8 +35,6 @@
 
             <NavigationInfo type='none'>
             <!--
-            -->
-            <!--
             NOTE:   If you comment-out the NavigationInfo element above,
                     you can adjust the position of the object.
             
