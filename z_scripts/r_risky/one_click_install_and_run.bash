@@ -18,16 +18,21 @@ function set_variables(){
 
 function clone_repo(){
     git clone $repo_url project_demo
+}
+
+function run_project(){
     cd project_demo
     bash Y_RUNME.bash
 }
-
 function init(){
     local intro_message;
     local repo_url;
+
     set_variables;
     say_hello;
     display_repo_being_clones;
+    clone_repo;
+    run_project;
 }
 
 init
