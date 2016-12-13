@@ -39,7 +39,7 @@ public class ChocoTestData {
     }
     
     public void init(){
-        settings = getSettings("settings.ini");
+        settings = getSettings("src/test/mongoDBdata/settings.ini");
         folder = "."+ File.separator + settings.get("fileFolder") + File.separator;
         firstNames = getNames(folder + settings.get("firstNameFile"));
 		lastNames = getNames(folder + settings.get("lastNameFile"));
