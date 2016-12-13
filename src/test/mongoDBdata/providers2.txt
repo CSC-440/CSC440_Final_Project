@@ -7,12 +7,3 @@
 777777777, providerSeven@providers.com, Provider Seven, 7 S. Provider St., Provider Metro, WI, 45678, true, true, true
 888888888, providerEight@providers.com, Provider Eight, 8 S. Provider St., Provider Wonder Land, WI, 11224, false, false, false
 999999999, providerNine@providers.com, Provider Nine, 9 S. Provider St., Provider Zoo, WI, 66655, true, false, false
-111111111, providerOne@providers.com, Provider One, 1 S. Provider St., Provider Town, WI, 12345, true, false, false
-222222222, providerTwo@providers.com, Provider Two, 2 S. Provider St., Provider City, WI, 54321, false, true, false
-333333333, providerThree@providers.com, Provider Three, 3 S. Provider St., ProviderVille, WI, 11223, false, false, true
-444444444, providerFour@providers.com, Provider Four, 4 S. Provider St., Provider Village, WI, 22334, true, true, false
-555555555, providerFive@providers.com, Provider Five, 5 S. Provider St., Provider Glen, WI, 78945, true, false, true
-666666666, providerSix@providers.com, Provider Six, 6 S. Provider St., Provider Place, WI, 65432, false, true, true
-777777777, providerSeven@providers.com, Provider Seven, 7 S. Provider St., Provider Metro, WI, 45678, true, true, true
-888888888, providerEight@providers.com, Provider Eight, 8 S. Provider St., Provider Wonder Land, WI, 11224, false, false, false
-999999999, providerNine@providers.com, Provider Nine, 9 S. Provider St., Provider Zoo, WI, 66655, true, false, false

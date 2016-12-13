@@ -638,7 +638,7 @@ public class Application implements CommandLineRunner{
 
            Map<String, Object> viewObjects = new HashMap<String, Object>();
            viewObjects.put("templateName", "report_pages/user_report.ftl");
-           viewObjects.put("title", "User Report being constructed!");
+           viewObjects.put("title", "User Report!");
            viewObjects.put("users", mongoController.getJSONListOfIdsFromRepo(userRepository));
            return new ModelAndView(viewObjects, "aMain.ftl");
         }, new FreeMarkerEngine());
@@ -775,7 +775,7 @@ public class Application implements CommandLineRunner{
         get("/managerReport", (request, response) -> {
            Map<String, Object> viewObjects = new HashMap<String, Object>();
            viewObjects.put("templateName", "report_pages/manager_report.ftl");
-           viewObjects.put("title", "Manager Report :Under Construction!");
+           viewObjects.put("title", "Manager Report!");
            
            String dateChoices = reportController.getJsonListOfDatesThatHaveBillables(billableRepository);
            viewObjects.put("date", dateChoices);
@@ -803,20 +803,6 @@ public class Application implements CommandLineRunner{
             if (dBug) System.out.println("returnString:\n" + returnString);
             return returnString;
         });
-
-        get("/billablesPerEachUserReport", (request, response) -> {
-           Map<String, Object> viewObjects = new HashMap<String, Object>();
-           viewObjects.put("message", "Billables Per Each User Report is currently under construction!");
-           viewObjects.put("templateName", "beingBuilt.ftl");
-           return new ModelAndView(viewObjects, "aMain.ftl");
-        }, new FreeMarkerEngine());
-
-        get("/billablesPerEachProviderReport", (request, response) -> {
-           Map<String, Object> viewObjects = new HashMap<String, Object>();
-           viewObjects.put("message", "Billables Per Each Provider Report is currently under construction!");
-           viewObjects.put("templateName", "beingBuilt.ftl");
-           return new ModelAndView(viewObjects, "aMain.ftl");
-        }, new FreeMarkerEngine());
 
 /*     _     _     _   _     ___ _  __
  *|_| |_ |  |_)   |_) / \ | | | |_ (_ 
