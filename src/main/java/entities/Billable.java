@@ -54,12 +54,14 @@ public class Billable extends Validable{
     }
     
     public void setDateServiced(String dateServiced) {
+        // For Testing and Debug.
+        boolean dBug = false;
+        if (dBug) System.out.println("\nDEBUG ON IN : Billable.setDateServiced(...)\n");
         
         String tempString = "";
         tempString = dateServiced.substring(dateServiced.lastIndexOf("/")+1) + "-";
         tempString += dateServiced.substring(0, dateServiced.indexOf("/")) + "-";
         tempString += dateServiced.substring((dateServiced.indexOf("/")+1), dateServiced.lastIndexOf("/"));
-        
         
         this.dateServiced = new DateTime(tempString);
     }
@@ -76,11 +78,14 @@ public class Billable extends Validable{
     }   
     // This is used when a new entity is created.
     public void setDateServicedRecorded() {
+        // For Testing and Debug.
+        boolean dBug = false;
+        if (dBug) System.out.println("\nDEBUG ON IN : Billable.setDateServicedRecorded()\n");
         
         DateTime dateTimeCreated = new DateTime();
         
-        System.out.println("setDateServicedRecorded called!");
-        System.out.println("dateTimeCreated = " + dateTimeCreated.toString("MM/dd/yyyy HH:mm:ss"));
+        if (dBug) System.out.println("setDateServicedRecorded called!");
+        if (dBug) System.out.println("dateTimeCreated = " + dateTimeCreated.toString("MM/dd/yyyy HH:mm:ss"));
 
         this.dateServicedRecorded = dateTimeCreated;
     }

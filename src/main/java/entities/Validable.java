@@ -239,7 +239,7 @@ public class Validable {
         }
         if(billable.getDateServiced() != null){
             String serviceDate = (String) billable.getDateServiced();
-            System.out.println(serviceDate);
+            if (dBug) System.out.println(serviceDate);
             if(!serviceDate.matches("^\\d{2}\\/\\d{2}\\/\\d{4}"))
                 returnBoolean = false;
         }
@@ -247,7 +247,7 @@ public class Validable {
             returnBoolean = false;
         if(billable.getDateServicedRecorded() != null){
             String recordedServiceDate = (String) billable.getDateServicedRecorded();
-            System.out.println(recordedServiceDate);
+            if (dBug) System.out.println(recordedServiceDate);
             if(!recordedServiceDate.matches("^\\d{2}\\/\\d{2}\\/\\d{4}\\s{1}\\d{2}\\:\\d{2}\\:\\d{2}"))
                 returnBoolean = false;
         }

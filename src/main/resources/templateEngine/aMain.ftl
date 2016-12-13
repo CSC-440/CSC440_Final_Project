@@ -108,8 +108,6 @@
                      <li><a href="userReport">User Report</a></li>
                      <li><a href="providerReport">Provider Report</a></li>
                      <li><a href="managerReport">Manager Report</a></li>
-                     <li><a href="billablesPerEachUserReport">Billables per User Report</a></li>
-                     <li><a href="billablesPerEachProviderReport">Billables per Provider Report</a></li>
                   </ul>
                </li>
 
