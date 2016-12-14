@@ -2,4 +2,4 @@
 
 ## Quick Install!
 
-![Clickable_Install_Link][https://CSC440_Final_Project/docs/img/install/clickable.jpg]
+![Clickable_Install_Link][https://csc-440.github.io/CSC440_Final_Project/img/install/clickable.jpg]
