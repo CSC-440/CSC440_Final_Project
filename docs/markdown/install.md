@@ -4,7 +4,7 @@
 
 * Create a new VM at [Cloud9](https://c9.io) in a Chrome browser tab.
 
-![New VM on C9](https://csc-440.github.io/CSC440_Final_Project/img/install/click_to_install.jpg)
+![New VM on C9](https://csc-440.github.io/CSC440_Final_Project/img/install/new_vm_on_c9.jpg)
 
 * Click Button at this [link](https://csc-440.github.io/CSC440_Final_Project/pgs/clickables.html).
 
