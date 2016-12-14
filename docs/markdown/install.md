@@ -2,4 +2,4 @@
 
 ## Quick Install!
 
-![Clickable_Install_Link][../img/quick_install.jpg]
+![Clickable_Install_Link][quick_install.jpg]
